@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const audio = document.getElementById('background-music');
     if (audio) {
-      audio.volume = 0.2;
+      audio.volume = 0.1;
       const playPromise = audio.play();
 
       if (playPromise !== undefined) {
