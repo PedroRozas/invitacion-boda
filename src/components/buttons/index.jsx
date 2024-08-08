@@ -20,11 +20,11 @@ const ButtonsLinks = () => {
       className="buttons-links"
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(3, 1fr)', sm: 'repeat(5, 1fr)' }, 
+        gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(5, 1fr)' }, 
         gap: { xs: 1, sm: 2, md: 4 }, 
         justifyItems: 'center', 
         alignItems: 'center', 
-        width: '95%',
+        width: '90%',
       }}
     >
       <IconButton onClick={handleOpen}>

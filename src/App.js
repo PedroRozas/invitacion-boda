@@ -1,30 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet';
 
 import MainSection from './components/mainSection.jsx';
 import fondo from './assets/fondo.png';
 import fondoMobile from './assets/fondovertical.png';
+import yourAudioFile from './assets/background.mp3';
 import './App.css';
 import ButtonsLinks from './components/buttons/index.jsx';
 
 const App = () => {
-  useEffect(() => {
-    const audio = document.getElementById('background-music');
-    if (audio) {
-      audio.volume = 0.1;
-      const playPromise = audio.play();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(new Audio(yourAudioFile));
 
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay was prevented. Trying to play the audio after a user interaction.", error);
-          document.addEventListener('click', () => {
-            audio.play();
-          });
-        });
-      }
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.volume = 0.1;
+    
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log("Autoplay was prevented. Trying to play the audio after a user interaction.", error);
+        document.addEventListener('click', () => {
+          audio.play();
+        }, { once: true });
+      });
     }
+
+    return () => {
+      audio.pause();
+    };
   }, []);
+
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <>
@@ -49,6 +70,9 @@ const App = () => {
       >
         <MainSection />
         <ButtonsLinks />
+        <IconButton onClick={togglePlayPause} sx={{ position: 'fixed', bottom: 20, right: 20 }}>
+          {isPlaying ? <IconPlayerPause /> : <IconPlayerPlay />}
+        </IconButton>
       </Box>
     </>
   );
