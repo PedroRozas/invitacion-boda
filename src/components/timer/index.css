@@ -1,0 +1,41 @@
+.timer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 1px;
+    height: 150px;
+    padding: 5px;
+
+    
+  }
+  
+  .timer-paper {
+    position: relative;
+    padding: 10px 50px;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: black;
+    font-size: 1.2rem;
+    max-width:450px; 
+    Max-height: 70px; 
+    z-index: 1;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+  }
+  
+  .border-image {
+    position: absolute;
+    width: 100%;
+    height: auto; 
+    left: 0;
+  }
+  
+  .border-image-top {
+    top: 0 ; 
+  }
+  
+  .border-image-bottom {
+    bottom: 0; 
+  }
+  
